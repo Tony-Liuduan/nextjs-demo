@@ -1,0 +1,7 @@
+{
+	"compilerOptions": {
+		"experimentalDecorators": true
+	},
+	"include": ["pages"],
+	"exclude": ["node_modules", "dist"]
+}

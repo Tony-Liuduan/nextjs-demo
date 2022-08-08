@@ -1,4 +1,4 @@
-import { observable, computed, action, makeObservable, autorun } from 'mobx';
+import { observable, computed, action, autorun } from 'mobx';
 import { observer } from 'mobx-react';
 import { configure } from 'mobx';
 
@@ -7,26 +7,26 @@ configure({
 });
 
 class ObservableTodoStore {
-	todos = [];
-	pendingRequests = 0;
+	@observable todos = [];
+	@observable pendingRequests = 0;
 
 	constructor() {
-		makeObservable(this, {
-			todos: observable,
-			pendingRequests: observable,
-			completedTodosCount: computed,
-			report: computed,
-			addTodo: action,
-		});
+		// makeObservable(this, {
+		// 	todos: observable,
+		// 	pendingRequests: observable,
+		// 	completedTodosCount: computed,
+		// 	report: computed,
+		// 	addTodo: action,
+		// });
 		autorun(() => console.log(this.report));
 	}
 
-	get completedTodosCount() {
-    console.log('completedTodosCount fn');
+	@computed get completedTodosCount() {
+		console.log('completedTodosCount fn');
 		return this.todos.filter(todo => todo.completed === true).length;
 	}
 
-	get report() {
+	@computed get report() {
 		console.log('report fn');
 		if (this.todos.length === 0) return '<none>';
 		const nextTodo = this.todos.find(todo => todo.completed === false);
@@ -36,7 +36,7 @@ class ObservableTodoStore {
 		);
 	}
 
-	addTodo(task) {
+	@atciton addTodo(task) {
 		this.todos.push({
 			task: task,
 			completed: false,
@@ -69,6 +69,7 @@ const peopleStore = observable([{ name: 'Michel' }, { name: 'Me' }]);
 store.todos[0].assignee = peopleStore[0];
 store.todos[1].assignee = peopleStore[1];
 peopleStore[0].name = 'Michel Weststrate';
+console.log(store.todos);
 
 const TodoList = observer(() => {
 	const onNewTodo = () => {
