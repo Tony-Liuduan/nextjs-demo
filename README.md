@@ -7,6 +7,8 @@
 > redux vs mobx <https://juejin.cn/post/6844903562095362056>
 > <https://juejin.cn/post/6844903990396715022>
 > <https://juejin.cn/post/6998057947070726158>
+> <https://juejin.cn/post/6945720333026459656#heading-6>
+> <https://juejin.cn/post/6945720333026459656#heading-6>
 
 ### 需求
 
@@ -40,6 +42,8 @@
 * TS 支持改造成本大
 
 ### mobx
+
+> <https://zh.mobx.js.org/react-integration.html>
 
 #### mobx-特点
 
@@ -97,3 +101,7 @@ getServerSideProps 更为被推荐  <https://www.webpro.nl/articles/migrate-from
 
 1. 涉及到公司产品和其他信息需要被更多人知道的页面的接口和数据尽可能放到服务端渲染 （getServerSideProps,getInitialProps）
 2. 不涉及以上信息的尽可能放到浏览器端做，减少node的压力，提高交互体验
+
+### TODO
+
+* 使用mobx开发高性能react应用 <https://foio.github.io/mobx-react/>
