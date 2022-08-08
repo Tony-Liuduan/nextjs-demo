@@ -5,6 +5,8 @@
 > 为什么要用 mobx <https://mp.weixin.qq.com/s/g5ZjQt9F1UUryisEW1csSA>
 > redux vs mobx <https://codeburst.io/mobx-vs-redux-with-react-a-noobs-comparison-and-questions-382ba340be09>
 > redux vs mobx <https://juejin.cn/post/6844903562095362056>
+> <https://juejin.cn/post/6844903990396715022>
+> <https://juejin.cn/post/6998057947070726158>
 
 ### 需求
 
@@ -45,7 +47,7 @@
 2. 多 store，通常按模块将应用状态划分，在多个独立的store中管理
 3. 存储数据使用可观察对象（数组不是数组是可观察对象）
 4. mobx 状态对象可变，可以直接使用新值更新状态对象值
-5. store 注入：```<Provider {...stores}>...父组件</Provider>```，子组件注入Props：@inject
+5. store 注入：```<Provider {...stores}>...父组件</Provider>```，子组件注入Props：@inject， hooks 使用 useContext 即可
 
 #### mobx-优点
 
@@ -61,6 +63,7 @@
 * 状态可以随意被修改，不纯
   * 解决方案：开启严格模式限制 `useStrict(true)`，且只可在 Store 中修改，不可在视图组件修改
 * 不支持 hook （mobx-react-lite 已支持）
+  * useStaticRendering replace enableStaticRendering
 * 使用 mobx 创建的可观察对象会在内存中使用 listener 来监听对象的变化，但实际上在服务端是没有必要监听变化的，将有可能造成内存泄漏
   * 解决方案：使用 `useStaticRendering(isServer)` 方法，当该文件在服务端执行时，让 mobx 创建静态的普通js对象即可
 * mobx 5 需要放弃ie，低版本ios 安卓
@@ -76,11 +79,6 @@
     * page
     * module（compnent上一层）
 2. 通用逻辑单独设计 store，领域模型设计
-
-TODO:
-
-* <https://juejin.cn/post/6844903990396715022>
-* <https://juejin.cn/post/6998057947070726158>
 
 ## nextjs use mobx
 
