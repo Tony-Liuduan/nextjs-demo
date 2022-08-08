@@ -81,3 +81,21 @@ TODO:
 
 * <https://juejin.cn/post/6844903990396715022>
 * <https://juejin.cn/post/6998057947070726158>
+
+## nextjs use mobx
+
+> <https://juejin.cn/post/6844904165630541837>
+
+* getStaticProps （静态生成）：在构建时获取数据。
+* getStaticPaths （静态生成）：指定 动态路由 以根据数据进行预渲染。
+* getServerSideProps （服务器端渲染）：在每个请求上获取数据。
+* getInitialProps （服务器端渲染）：在每个请求上获取数据。
+
+只要 getServerSideProps 和 getInitialProps 的页面都不会构建成静态文件
+
+getServerSideProps 更为被推荐  <https://www.webpro.nl/articles/migrate-from-getinitialprops-to-getserversideprops-in-nextjs>
+
+### 使用原则
+
+1. 涉及到公司产品和其他信息需要被更多人知道的页面的接口和数据尽可能放到服务端渲染 （getServerSideProps,getInitialProps）
+2. 不涉及以上信息的尽可能放到浏览器端做，减少node的压力，提高交互体验
