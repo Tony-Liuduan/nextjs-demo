@@ -1,33 +1,20 @@
 import { observable, computed, action, autorun } from 'mobx';
-import { observer } from 'mobx-react';
-import { configure } from 'mobx';
-
-configure({
-	enforceActions: 'never',
-});
-
+import { observer } from 'mobx-react-lite';
 class ObservableTodoStore {
 	@observable todos = [];
 	@observable pendingRequests = 0;
 
 	constructor() {
-		// makeObservable(this, {
-		// 	todos: observable,
-		// 	pendingRequests: observable,
-		// 	completedTodosCount: computed,
-		// 	report: computed,
-		// 	addTodo: action,
-		// });
 		autorun(() => console.log(this.report));
 	}
 
-	@computed get completedTodosCount() {
-		console.log('completedTodosCount fn');
+	@computed
+	get completedTodosCount() {
 		return this.todos.filter(todo => todo.completed === true).length;
 	}
 
-	@computed get report() {
-		console.log('report fn');
+	@computed
+	get report() {
 		if (this.todos.length === 0) return '<none>';
 		const nextTodo = this.todos.find(todo => todo.completed === false);
 		return (
@@ -36,24 +23,25 @@ class ObservableTodoStore {
 		);
 	}
 
-	@atciton addTodo(task) {
+	@action
+	addTodo(task) {
 		this.todos.push({
 			task: task,
 			completed: false,
 			assignee: null,
 		});
-		store.pendingRequests++;
-		setTimeout(
-			action(() => {
-				this.todos.push({
-					task: 'Random Todo ' + Math.random(),
-					completed: false,
-					assignee: null,
-				});
-				this.pendingRequests--;
-			}),
-			2000
-		);
+		// store.pendingRequests++;
+		// setTimeout(
+		// 	action(() => {
+		// 		this.todos.push({
+		// 			task: 'Random Todo ' + Math.random(),
+		// 			completed: false,
+		// 			assignee: null,
+		// 		});
+		// 		this.pendingRequests--;
+		// 	}),
+		// 	2000
+		// );
 	}
 }
 
@@ -69,7 +57,6 @@ const peopleStore = observable([{ name: 'Michel' }, { name: 'Me' }]);
 store.todos[0].assignee = peopleStore[0];
 store.todos[1].assignee = peopleStore[1];
 peopleStore[0].name = 'Michel Weststrate';
-console.log(store.todos);
 
 const TodoList = observer(() => {
 	const onNewTodo = () => {
@@ -87,7 +74,6 @@ const TodoList = observer(() => {
 			{store.pendingRequests > 0 ? <marquee>Loading...</marquee> : null}
 			<button onClick={onNewTodo}>New Todo</button>
 			<small> (double-click a todo to edit)</small>
-			{/* <RenderCounter /> */}
 		</div>
 	);
 });
@@ -106,7 +92,6 @@ const TodoView = observer(({ todo }) => {
 			<input type='checkbox' checked={todo.completed} onChange={onToggleCompleted} />
 			{todo.task}
 			{todo.assignee ? <small> ({todo.assignee.name}) </small> : null}
-			{/* <RenderCounter /> */}
 		</li>
 	);
 });
